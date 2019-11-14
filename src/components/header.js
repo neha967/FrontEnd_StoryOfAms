@@ -21,7 +21,8 @@ class Header extends Component{
     }
 
     fetchAndLoadProjects = () => {
-        axios.get("http://localhost:5000/fetchprojects")
+        // axios.get("http://localhost:5000/fetchprojects")
+        axios.get(`${process.env.REACT_APP_API}/fetchprojects`)
         .then(response=>{
             let flowcharts = (response.data.filter(each=>(
                 each.stage === "Flowchart"
@@ -61,8 +62,10 @@ class Header extends Component{
 
     
     deleteHandler = (id) => {
-        axios.post(`http://localhost:5000/delete/${id}`)
+        // axios.post(`http://localhost:5000/delete/${id}`)
+        axios.post(`${process.env.REACT_APP_API}/delete/${id}`)
         .then(response=>{
+            debugger
             this.fetchAndLoadProjects()
             this.setState({
                 newProjectState: []
@@ -81,7 +84,8 @@ class Header extends Component{
     updateStateHandler = (e,id) => {
         let newStage = e.target.value;
 
-        axios.post(`http://localhost:5000/update/${id}/${newStage}`)
+        // axios.post(`http://localhost:5000/update/${id}/${newStage}`)
+        axios.post(`${process.env.REACT_APP_API}/update/${id}/${newStage}`)
         .then(response=>{
             this.fetchAndLoadProjects()
             this.setState({
@@ -98,7 +102,8 @@ class Header extends Component{
             description: this.state.description
         }
 
-        axios.post("http://localhost:5000/addproject", project)
+        // axios.post("http://localhost:5000/addproject", project)
+        axios.post(`${process.env.REACT_APP_API}/addproject`, project)
         .then(response=>{
 
             let newProjectArray = [...this.state.newProjectState]

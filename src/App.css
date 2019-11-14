@@ -95,4 +95,5 @@ input[type="submit"] {
 
 .delete span {
   cursor: pointer;
+  font-size: 22px;
 }
